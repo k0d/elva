@@ -1,16 +1,17 @@
-.TH "tio" "1" "June 2018"
+.TH "elva" "1" "June 2018"
 
 .SH "NAME"
+elva - an enhanced version of tio
 tio \- a simple TTY terminal I/O application
 
 .SH "SYNOPSIS"
 .PP
-.B tio
+.B elva
 .RI "[" <options> "] " "<tty-device>"
 
 .SH "DESCRIPTION"
 .PP
-.B tio
+.B elva
 is a simple TTY terminal application which features a straightforward
 commandline interface to easily connect to TTY devices for basic input/output.
 
@@ -45,7 +46,7 @@ Set output delay [ms] inserted between each sent character (default: 0).
 
 Disable automatic connect.
 
-By default tio automatically connects to the provided device if present. If the device is not present, it will wait for it to appear and then connect. If the connection is lost (eg. device disconnects), it will wait for the device to reappear and then reconnect.
+By default elva automatically connects to the provided device if present. If the device is not present, it will wait for it to appear and then connect. If the connection is lost (eg. device disconnects), it will wait for the device to reappear and then reconnect.
 
 However, if the
 .B \-\-no\-autoconnect
@@ -98,49 +99,54 @@ Display help.
 .SH "KEYS"
 .PP
 .TP 16n
-In session, the following key sequences are intercepted as tio commands:
-.IP "\fBctrl-t ?"
+In session, the following key sequences are intercepted as elva commands:
+.IP "\fBctrl-a ?"
 List available key commands
-.IP "\fBctrl-t b"
+.IP "\fBctrl-a a"
+Send ctrl-a key code
+.IP "\fBctrl-a b"
 Send serial break (triggers SysRq on Linux, etc.)
-.IP "\fBctrl-t c"
+.IP "\fBctrl-a c"
 Show configuration (baudrate, databits, etc.)
-.IP "\fBctrl-t e"
+.IP "\fBctrl-a e"
 Toggle local echo mode
-.IP "\fBctrl-t h"
+.IP "\fBctrl-a h"
 Toggle hexadecimal mode
-.IP "\fBctrl-t l"
+.IP "\fBctrl-a k or ctrl-a k"
+Kill
+.IP "\fBctrl-a l"
 Clear screen
-.IP "\fBctrl-t q"
-Quit
-.IP "\fBctrl-t s"
+.IP "\fBctrl-a s"
 Show TX/RX statistics
-.IP "\fBctrl-t t"
-Send ctrl-t key code
-.IP "\fBctrl-t v"
+.IP "\fBctrl-a T"
+Togggle timestamps
+.IP "\fBctrl-a v"
 Show version
+.IP "\fBctrl-a /"
+Quit
 
 .SH "EXAMPLES"
 .TP
 Typical use is without options. For example:
 
-tio /dev/ttyUSB0
+elva /dev/ttyUSB0
 .TP
 Which corresponds to the commonly used options:
 
-tio \-b 115200 \-d 8 \-f none \-s 1 \-p none /dev/ttyUSB0
+elva \-b 115200 \-d 8 \-f none \-s 1 \-p none /dev/ttyUSB0
 .TP
 It is recommended to connect serial tty devices by ID. For example:
 
-tio /dev/serial/by\-id/usb\-FTDI_TTL232R-3V3_FTGQVXBL\-if00\-port0
+elva /dev/serial/by\-id/usb\-FTDI_TTL232R-3V3_FTGQVXBL\-if00\-port0
 .PP
-Using serial devices by ID ensures that tio automatically reconnects to the
+Using serial devices by ID ensures that elva automatically reconnects to the
 correct serial device if the device is disconnected and then reconnected.
 
 .SH "WEBSITE"
 .PP
-Visit https://tio.github.io
+Visit https://github.com/k0d/elva
 
 .SH "AUTHOR"
 .PP
-Written by Martin Lund <martin.lund@keep\-it\-simple.com>.
+elva by Mark Olsson <mark@markolsson.se>.
+tio created by Martin Lund <martin.lund@keep\-it\-simple.com>.

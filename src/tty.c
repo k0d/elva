@@ -110,11 +110,10 @@ void handle_command_sequence(char input_char, char previous_char, char *output_c
                 tio_printf(" ctrl-a k        Kill");
                 tio_printf(" ctrl-a ctrl-k   Kill");
                 tio_printf(" ctrl-a l        Clear screen");
-                tio_printf(" ctrl-a q        Quit (legacy)");
                 tio_printf(" ctrl-a s        Show statistics");
                 tio_printf(" ctrl-a T        Toggle timestamps");
                 tio_printf(" ctrl-a v        Show version");
-                tio_printf(" ctrl-a ctrl-\\   Quit");
+                tio_printf(" ctrl-a \\   Quit");
                 break;
 
             case KEY_A:
@@ -190,7 +189,7 @@ void handle_command_sequence(char input_char, char previous_char, char *output_c
                 break;
 
             case KEY_FORWARD_SLASH:
-                /* Exit upon ctrl-a ctrl-/ sequence */
+                /* Exit upon ctrl-a / sequence */
                 exit(EXIT_SUCCESS);
 
             default:
