@@ -1,0 +1,3 @@
+Check key-bindings for elva matches screen
+Implement device list chooser if no arguments are sent to elva
+Fix resetting of terminal after quit (/r/n issue)
