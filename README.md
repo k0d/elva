@@ -8,7 +8,7 @@ elva was created to bring in some breaking features which I find useful.
 ** send ctrl-a code: ```ctrl-a a```
 ** kill: ```ctrl-a ctrl-k``` or ```ctrl-a k```
 ** quit: ```ctrl-a ctrl-/```
-* color_print outputs in blue by default as yellow is more for warnings
+* color_print outputs in green by default as yellow is more for warnings
 
 
 # Original README

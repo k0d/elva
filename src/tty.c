@@ -114,7 +114,7 @@ void handle_command_sequence(char input_char, char previous_char, char *output_c
                 tio_printf(" ctrl-a s        Show statistics");
                 tio_printf(" ctrl-a T        Toggle timestamps");
                 tio_printf(" ctrl-a v        Show version");
-                tio_printf(" ctrl-a ctrl-\   Quit");
+                tio_printf(" ctrl-a ctrl-\\   Quit");
                 break;
 
             case KEY_A:

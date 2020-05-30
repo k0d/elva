@@ -1,7 +1,9 @@
 /*
+ * elva - an enhanced version of tio
  * tio - a simple TTY terminal I/O application
  *
- * Copyright (c) 2014-2018  Martin Lund
+ * Copyright (c) 2014-2017  Martin Lund
+ * Copyright (c) 2020  Mark Olsson <mark@markolsson.se>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,7 +74,7 @@ void print_help(char *argv[])
     printf("\n");
     printf("See the man page for list of supported mapping flags.\n");
     printf("\n");
-    printf("In session, press ctrl-t q to quit.\n");
+    printf("In session, press ctrl-a / to quit.\n");
     printf("\n");
 }
 
@@ -190,8 +192,9 @@ void parse_options(int argc, char *argv[])
                 break;
 
             case 'v':
-                printf("tio v%s\n", VERSION);
+                printf("elva v%s\n", VERSION);
                 printf("Copyright (c) 2014-2018 Martin Lund\n");
+                printf("Copyright (c) 2020 Mark Olsson <mark@markolsson.se>\n");
                 printf("\n");
                 printf("License GPLv2+: GNU GPL version 2 or later <http://gnu.org/licenses/gpl-2.0.html>.\n");
                 printf("This is free software: you are free to change and redistribute it.\n");

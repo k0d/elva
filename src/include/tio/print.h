@@ -36,7 +36,7 @@
 
 #define color_printf(format, args...) \
    { \
-     fprintf (stdout, "\r" ANSI_COLOR_BLUE format ANSI_COLOR_RESET "\r\n", ## args); \
+     fprintf (stdout, "\r" ANSI_COLOR_GREEN format ANSI_COLOR_RESET "\r\n", ## args); \
      fflush(stdout); \
    }
 

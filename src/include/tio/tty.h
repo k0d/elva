@@ -42,7 +42,7 @@
 #define KEY_CTRL_A 0x1
 #define KEY_CTRL_K 0xC
 
-#define KEY_FORWARD_SLASH 0x47
+#define KEY_FORWARD_SLASH 0x2F
 
 #define NORMAL 0
 #define HEX 1
