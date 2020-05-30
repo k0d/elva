@@ -1,7 +1,17 @@
-# tio - a simple TTY terminal I/O application
+# elva - an enhanced version of tio (A simple TTY terminal I/O application)
 
-[![Build Status](https://travis-ci.org/tio/tio.svg?branch=master)](https://travis-ci.org/tio/tio)
-[![Snap Status](https://build.snapcraft.io/badge/tio/tio.snapcraft.svg)](https://build.snapcraft.io/user/tio/tio.snapcraft)
+tio is orginally created by Martin Lund <martin.lund@keep-it-simple.com>.
+elva was created to bring in some breaking features which I find useful.
+
+## Changes
+* ```ctrl-t``` is now ```ctrl-a``` to match *screen*
+** send ctrl-a code: ```ctrl-a a```
+** kill: ```ctrl-a ctrl-k``` or ```ctrl-a k```
+** quit: ```ctrl-a ctrl-/```
+* color_print outputs in blue by default as yellow is more for warnings
+
+
+# Original README
 
 ## 1. Introduction
 

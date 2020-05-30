@@ -1,7 +1,9 @@
 /*
+ * elva - an enhanced version of tio
  * tio - a simple TTY terminal I/O application
  *
  * Copyright (c) 2014-2017  Martin Lund
+ * Copyright (c) 2020  Mark Olsson <mark@markolsson.se>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,13 +36,13 @@
 
 #define color_printf(format, args...) \
    { \
-     fprintf (stdout, "\r" ANSI_COLOR_YELLOW format ANSI_COLOR_RESET "\r\n", ## args); \
+     fprintf (stdout, "\r" ANSI_COLOR_BLUE format ANSI_COLOR_RESET "\r\n", ## args); \
      fflush(stdout); \
    }
 
 #define warning_printf(format, args...) \
    { \
-     fprintf (stdout, "\rWarning: " format "\r\n", ## args); \
+     fprintf (stdout, "\rWarning: " ANSI_COLOR_YELLOW format ANSI_COLOR_RESET "\r\n", ## args); \
      fflush(stdout); \
    }
 

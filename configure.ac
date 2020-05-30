@@ -1,5 +1,5 @@
 AC_PREREQ([2.68])
-AC_INIT([tio], [1.32], [], [tio], [https://tio.github.io])
+AC_INIT([elva], [1.32], [], [elva], [https://github.com/k0d/elva])
 AC_CONFIG_HEADERS([src/include/config.h])
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz no-dist-gzip -Wall -Werror])
 AM_SILENT_RULES([yes])
@@ -23,28 +23,28 @@ fi
 AC_SUBST([BASH_COMPLETION_DIR])
 AM_CONDITIONAL([ENABLE_BASH_COMPLETION],[test "x$with_bash_completion_dir" != "xno"])
 
-# TIO_CHECK_BAUDRATE(N)
+# ELVA_CHECK_BAUDRATE(N)
 AC_DEFUN(
-    [TIO_CHECK_BAUDRATE],
+    [ELVA_CHECK_BAUDRATE],
     [
-        AC_CHECK_DECL([B$1], [tio_have_decl=1], [tio_have_decl=0], [[#include <termios.h>]])
-        AS_IF([test $tio_have_decl = 1], [
+        AC_CHECK_DECL([B$1], [elva_have_decl=1], [elva_have_decl=0], [[#include <termios.h>]])
+        AS_IF([test $elva_have_decl = 1], [
             AC_SUBST([BAUDRATES], ["$BAUDRATES $1"])
             AC_SUBST([BAUDRATE_CASES], ["$BAUDRATE_CASES case $1: baudrate = B$1; break;"])]
         )
     ]
 )
 
-# TIO_CHECK_BAUDRATES(N1, N2, ...)
+# ELVA_CHECK_BAUDRATES(N1, N2, ...)
 AC_DEFUN(
-    [TIO_CHECK_BAUDRATES],
-    [m4_foreach([n], [$@], [TIO_CHECK_BAUDRATE(m4_normalize(n))])]
+    [ELVA_CHECK_BAUDRATES],
+    [m4_foreach([n], [$@], [ELVA_CHECK_BAUDRATE(m4_normalize(n))])]
 )
 
 # Check for available terminal I/O speeds
 BAUDRATES=
 BAUDRATE_CASES=
-TIO_CHECK_BAUDRATES(
+ELVA_CHECK_BAUDRATES(
     0,
     50,
     75,

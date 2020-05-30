@@ -1,5 +1,6 @@
 *.tar.xz
 src/*.o
+src/elva
 src/tio
 Makefile.in
 Makefile
@@ -21,4 +22,6 @@ src/include/config.h.in~
 src/include/stamp-h1
 *.swp
 /tio-*
+/elva-*
 /src/bash-completion/tio
+/src/bash-completion/elva

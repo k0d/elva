@@ -1,7 +1,9 @@
 /*
+ * elva - an enhanced version of tio
  * tio - a simple TTY terminal I/O application
  *
  * Copyright (c) 2014-2017  Martin Lund
+ * Copyright (c) 2020  Mark Olsson <mark@markolsson.se>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -90,7 +92,7 @@ void handle_command_sequence(char input_char, char previous_char, char *output_c
         forward = &unused_bool;
 
     /* Handle escape key commands */
-    if (previous_char == KEY_CTRL_T)
+    if (previous_char == KEY_CTRL_A)
     {
         /* Do not forward input char to output by default */
         *forward = false;
@@ -99,17 +101,26 @@ void handle_command_sequence(char input_char, char previous_char, char *output_c
         {
             case KEY_QUESTION:
                 tio_printf("Key commands:");
-                tio_printf(" ctrl-t ?   List available key commands");
-                tio_printf(" ctrl-t b   Send break");
-                tio_printf(" ctrl-t c   Show configuration");
-                tio_printf(" ctrl-t e   Toggle local echo mode");
-                tio_printf(" ctrl-t h   Toggle hexadecimal mode");
-                tio_printf(" ctrl-t l   Clear screen");
-                tio_printf(" ctrl-t q   Quit");
-                tio_printf(" ctrl-t s   Show statistics");
-                tio_printf(" ctrl-t t   Send ctrl-t key code");
-                tio_printf(" ctrl-t T   Toggle timestamps");
-                tio_printf(" ctrl-t v   Show version");
+                tio_printf(" ctrl-a ?        List available key commands");
+                tio_printf(" ctrl-a a        Send ctrl-a key code");
+                tio_printf(" ctrl-a b        Send break");
+                tio_printf(" ctrl-a c        Show configuration");
+                tio_printf(" ctrl-a e        Toggle local echo mode");
+                tio_printf(" ctrl-a h        Toggle hexadecimal mode");
+                tio_printf(" ctrl-a k        Kill");
+                tio_printf(" ctrl-a ctrl-k   Kill");
+                tio_printf(" ctrl-a l        Clear screen");
+                tio_printf(" ctrl-a q        Quit (legacy)");
+                tio_printf(" ctrl-a s        Show statistics");
+                tio_printf(" ctrl-a T        Toggle timestamps");
+                tio_printf(" ctrl-a v        Show version");
+                tio_printf(" ctrl-a ctrl-\   Quit");
+                break;
+
+            case KEY_A:
+                /* Send ctrl-a key code upon ctrl-a a sequence */
+                *output_char = KEY_CTRL_A;
+                *forward = true;
                 break;
 
             case KEY_B:
@@ -153,26 +164,21 @@ void handle_command_sequence(char input_char, char previous_char, char *output_c
                 }
                 break;
 
+            case KEY_K:
+            case KEY_CTRL_K:
+                /* Exit upon ctrl-a ctrl-k or ctrl-a k sequence */
+                exit(EXIT_SUCCESS);
+
             case KEY_L:
                 /* Clear screen using ANSI/VT100 escape code */
                 printf("\033c");
                 fflush(stdout);
                 break;
 
-            case KEY_Q:
-                /* Exit upon ctrl-t q sequence */
-                exit(EXIT_SUCCESS);
-
             case KEY_S:
-                /* Show tx/rx statistics upon ctrl-t s sequence */
+                /* Show tx/rx statistics upon ctrl-a s sequence */
                 tio_printf("Statistics:");
                 tio_printf(" Sent %lu bytes, received %lu bytes", tx_total, rx_total);
-                break;
-
-            case KEY_T:
-                /* Send ctrl-t key code upon ctrl-t t sequence */
-                *output_char = KEY_CTRL_T;
-                *forward = true;
                 break;
 
             case KEY_SHIFT_T:
@@ -180,11 +186,15 @@ void handle_command_sequence(char input_char, char previous_char, char *output_c
                 break;
 
             case KEY_V:
-                tio_printf("tio v%s", VERSION);
+                tio_printf("elva v%s", VERSION);
                 break;
 
+            case KEY_FORWARD_SLASH:
+                /* Exit upon ctrl-a ctrl-/ sequence */
+                exit(EXIT_SUCCESS);
+
             default:
-                /* Ignore unknown ctrl-t escaped keys */
+                /* Ignore unknown ctrl-a escaped keys */
                 break;
         }
     }
@@ -261,8 +271,8 @@ void stdout_configure(void)
     }
 
     /* Print launch hints */
-    tio_printf("tio v%s", VERSION);
-    tio_printf("Press ctrl-t q to quit");
+    tio_printf("elva v%s", VERSION);
+    tio_printf("Press ctrl-a / to quit");
 
     /* At start use normal print function */
     print = print_normal;
@@ -686,9 +696,9 @@ int tty_connect(void)
                     goto error_read;
                 }
 
-                /* Forward input to output except ctrl-t key */
+                /* Forward input to output except ctrl-a key */
                 output_char = input_char;
-                if (input_char == KEY_CTRL_T)
+                if (input_char == KEY_CTRL_A)
                     forward = false;
 
                 /* Handle commands */

@@ -1,8 +1,8 @@
 #
-# Bash completion script for tio.
+# Bash completion script for elva.
 #
 
-_tio()
+_elva()
 {
     local cur prev opts base
     COMPREPLY=()
@@ -81,5 +81,5 @@ _tio()
    return 0
 }
 
-# Bind completion to tio command
-complete -o default -F _tio tio
+# Bind completion to elva command
+complete -o default -F _elva elva

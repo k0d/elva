@@ -1,6 +1,6 @@
 AM_CFLAGS = -Wall
-bin_PROGRAMS = tio
-tio_SOURCES = tty.c \
+bin_PROGRAMS = elva
+elva_SOURCES = tty.c \
               options.c \
               time.c \
               main.c \
@@ -14,10 +14,10 @@ tio_SOURCES = tty.c \
               include/tio/error.h
 
 if ADD_SETSPEED2
-tio_SOURCES += setspeed2.c
+elva_SOURCES += setspeed2.c
 endif
 
 if ENABLE_BASH_COMPLETION
 bashcompletiondir=@BASH_COMPLETION_DIR@
-bashcompletion_DATA=bash-completion/tio
+bashcompletion_DATA=bash-completion/elva
 endif
